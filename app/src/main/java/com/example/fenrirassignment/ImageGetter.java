@@ -11,9 +11,11 @@ import java.net.URL;
 public class ImageGetter extends AsyncTask<String, Void, Bitmap> {
 
     private SearchResult searchResult;
+    private int index;
 
-    public ImageGetter(SearchResult searchResult){
+    public ImageGetter(SearchResult searchResult, int index){
         this.searchResult = searchResult;
+        this.index = index;
     }
 
     @Override
@@ -34,6 +36,6 @@ public class ImageGetter extends AsyncTask<String, Void, Bitmap> {
 
     @Override
     protected void onPostExecute(Bitmap result) {
-        searchResult.setRestInfo(result);
+        searchResult.setRestInfo(result, index);
     }
 }
