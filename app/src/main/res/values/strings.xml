@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">FenrirAssignment</string>
+
+    <string-array name="list">
+        <item>300m</item>
+        <item>500m</item>
+        <item>1000m</item>
+        <item>2000m</item>
+        <item>3000m</item>
+    </string-array>
 </resources>
