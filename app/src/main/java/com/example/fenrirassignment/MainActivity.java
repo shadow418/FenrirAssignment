@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
     private TextView textView;
     private Spinner rangeSpinner;
 
-    RestaurantSearcher restaurantSearcher;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
     }
 
     public void serch(View view){
-        restaurantSearcher = new RestaurantSearcher(this);
+        RestaurantSearcher restaurantSearcher = new RestaurantSearcher(this);
         restaurantSearcher.execute(latitude, longitude, String.valueOf(rangeSpinner.getSelectedItemPosition() + 1));
     }
 

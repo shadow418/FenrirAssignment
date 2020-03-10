@@ -23,7 +23,7 @@ public class RestaurantSearcher extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... strings) {
         //String url = API_URL + "?keyid=" + ACCESS_KEY + "&latitude=" + strings[0] + "&longitude=" + strings[1] + "&range=" + strings[2];
-        String url = API_URL + "?keyid=" + ACCESS_KEY + "&latitude=34.923" + "&longitude=135.923" + "&range=" + strings[2];
+        String url = API_URL + "?keyid=" + ACCESS_KEY + "&latitude=35.0706" + "&longitude=135.9940" + "&range=" + strings[2];
         try {
             URL query = new URL(url);
             HttpURLConnection connection = (HttpURLConnection)query.openConnection();
@@ -39,6 +39,7 @@ public class RestaurantSearcher extends AsyncTask<String, Void, String> {
                 while((line = reader.readLine()) != null) {
                     result.append(line);
                 }
+                connection.disconnect();
                 return result.toString();
             }
         }catch (Exception e){
