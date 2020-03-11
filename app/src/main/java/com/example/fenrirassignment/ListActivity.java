@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,24 +17,23 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class SearchResult extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity {
 
-    private JSONObject searchResult;
     private JSONArray restList;
     private LinearLayout list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
+        setContentView(R.layout.activity_list);
 
         Intent intent = this.getIntent();
         String result = intent.getStringExtra("result");
         list = (LinearLayout)findViewById(R.id.list);
         try {
-            searchResult = new JSONObject(result);
+            JSONObject searchResult = new JSONObject(result);
             restList = searchResult.getJSONArray("rest");
-            for(int i = 0; i < 2; i++){
+            for(int i = 0; i < restList.length(); i++){
                 JSONObject restInfo = restList.getJSONObject(i);
                 ImageGetter imageGetter = new ImageGetter(this, i);
                 JSONObject thumbInfo = restInfo.getJSONObject("image_url");
@@ -45,7 +45,7 @@ public class SearchResult extends AppCompatActivity {
     }
 
     //このメソッド肥大化してるからメソッド分割する
-    public void setRestInfo(Bitmap image, int index){
+    public void setRestInfo(final Bitmap image, int index){
         try{
             final JSONObject restInfo = restList.getJSONObject(index);
 
@@ -55,19 +55,22 @@ public class SearchResult extends AppCompatActivity {
             linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(SearchResult.this, DetailActivity.class);
+                    Intent intent = new Intent(ListActivity.this, DetailActivity.class);
                     intent.putExtra("restInfo", restInfo.toString());
+                    intent.putExtra("shopImage", image);
                     startActivity(intent);
-                    Log.d("test", "jumpDetail");
                 }
             });
 
             ImageView thumb = new ImageView(this);
-            //Javaからの画像サイズの変え方がわからない，heightを固定値にしたい
-            thumb.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            thumb.setImageBitmap(image);
+            thumb.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 600));
             thumb.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            thumb.setAdjustViewBounds(true);
+            //thumb.setAdjustViewBounds(true); //これをコメントアウトすると縦が固定幅のまま横幅を画面いっぱいにできた
+            if(image != null){
+                thumb.setImageBitmap(image);
+            }else{
+                thumb.setImageResource(R.drawable.ic_launcher_background);
+            }
 
             TextView name = new TextView(this);
             name.setText(restInfo.getString("name"));
@@ -75,7 +78,8 @@ public class SearchResult extends AppCompatActivity {
 
             JSONObject accessInfo = restInfo.getJSONObject("access");
             TextView access = new TextView(this);
-            access.setText(accessInfo.getString("line") + accessInfo.getString("station") + " " + accessInfo.getString("walk") + "分");
+            String accessText = accessInfo.getString("line") + accessInfo.getString("station") + " " + accessInfo.getString("walk") + "分";
+            access.setText(accessText);
             access.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
 
             TextView frame = new TextView(this);

@@ -27,7 +27,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/text0"
+                android:text="@string/title1"
                 android:textSize="24sp" />
         </LinearLayout>
 

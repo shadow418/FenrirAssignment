@@ -11,7 +11,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
     }
 
     public void transSearchResult(String result){
-        Intent intent = new Intent(this, SearchResult.class);
+        Intent intent = new Intent(this, ListActivity.class);
         intent.putExtra("result", result);
         startActivity(intent);
     }

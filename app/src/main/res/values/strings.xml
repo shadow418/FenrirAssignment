@@ -3,17 +3,24 @@
 
     <string name="gpsInfo">緯度：　経度：</string>
 
-    <string name="text0">検索画面</string>
+    <string name="title1">検索画面</string>
     <string name="text1">現在地から半径</string>
     <string name="text2">にあるお店を</string>
     <string name="text3">検索</string>
 
     <string name="back">&lt;</string>
-    <string name="text4">検索結果</string>
+    <string name="title2">検索結果</string>
 
     <string name="thumb">サムネイル</string>
     <string name="name">店名</string>
     <string name="access">アクセス</string>
+
+    <string name="title3">店舗詳細</string>
+
+    <string name="basicInfo">基本情報</string>
+    <string name="tell">電話番号</string>
+    <string name="address">住所</string>
+    <string name="openHours">営業時間</string>
 
     <string-array name="list">
         <item>300m</item>
