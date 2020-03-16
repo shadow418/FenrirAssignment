@@ -41,6 +41,9 @@ public class RestaurantSearcher extends AsyncTask<String, Void, String> {
                 }
                 connection.disconnect();
                 return result.toString();
+            }else{
+                connection.disconnect();
+                return null;
             }
         }catch (Exception e){
             e.printStackTrace();

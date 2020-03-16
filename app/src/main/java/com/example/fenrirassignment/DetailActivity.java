@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -49,9 +50,12 @@ public class DetailActivity extends AppCompatActivity {
 
             JSONObject accessInfo = restInfo.getJSONObject("access");
             String accessText = accessInfo.getString("line") + accessInfo.getString("station") + " " + accessInfo.getString("walk") + "分";
+            if(accessText.equals(" 分")){
+                accessText = " --";
+            }
             access.setText(accessText);
 
-            tell.setText(tell.getText() + "\n" + restInfo.getString("tel"));
+            tell.setText(tell.getText() + "\n" +restInfo.getString("tel"));
 
             address.setText(address.getText() + "\n" + restInfo.getString("address"));
 
@@ -59,5 +63,9 @@ public class DetailActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void backActivity(View view){
+        finish();
     }
 }

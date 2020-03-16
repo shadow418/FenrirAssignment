@@ -33,15 +33,20 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         rangeSpinner = (Spinner)findViewById(R.id.range);
     }
 
-    public void serch(View view){
+    public void search(View view){
         RestaurantSearcher restaurantSearcher = new RestaurantSearcher(this);
         restaurantSearcher.execute(latitude, longitude, String.valueOf(rangeSpinner.getSelectedItemPosition() + 1));
     }
 
     public void transSearchResult(String result){
-        Intent intent = new Intent(this, ListActivity.class);
-        intent.putExtra("result", result);
-        startActivity(intent);
+        if(result != null) {
+            Intent intent = new Intent(this, ListActivity.class);
+            intent.putExtra("result", result);
+            startActivity(intent);
+        }else{
+            TextView error = (TextView)findViewById(R.id.error);
+            error.setText("お店が見つかりません");
+        }
     }
 
     @Override

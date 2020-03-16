@@ -44,7 +44,6 @@ public class ListActivity extends AppCompatActivity {
         }
     }
 
-    //このメソッド肥大化してるからメソッド分割する
     public void setRestInfo(final Bitmap image, int index){
         try{
             final JSONObject restInfo = restList.getJSONObject(index);
@@ -65,7 +64,6 @@ public class ListActivity extends AppCompatActivity {
             ImageView thumb = new ImageView(this);
             thumb.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 600));
             thumb.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            //thumb.setAdjustViewBounds(true); //これをコメントアウトすると縦が固定幅のまま横幅を画面いっぱいにできた
             if(image != null){
                 thumb.setImageBitmap(image);
             }else{
@@ -79,6 +77,9 @@ public class ListActivity extends AppCompatActivity {
             JSONObject accessInfo = restInfo.getJSONObject("access");
             TextView access = new TextView(this);
             String accessText = accessInfo.getString("line") + accessInfo.getString("station") + " " + accessInfo.getString("walk") + "分";
+            if(accessText.equals(" 分")){
+                accessText = " --";
+            }
             access.setText(accessText);
             access.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
 
