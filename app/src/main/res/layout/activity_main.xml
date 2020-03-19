@@ -24,13 +24,6 @@
             android:text="@string/title1"
             android:textSize="24sp" />
 
-        <TextView
-            android:id="@+id/gpsInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center|center_horizontal"
-            android:text="@string/gpsInfo" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

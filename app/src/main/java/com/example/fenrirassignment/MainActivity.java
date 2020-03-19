@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
     private LocationManager locationManager;
     private String latitude;
     private String longitude;
-    private TextView textView;
     private Spinner rangeSpinner;
 
     @Override
@@ -29,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         setContentView(R.layout.activity_main);
 
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        textView = (TextView)findViewById(R.id.gpsInfo);
         rangeSpinner = (Spinner)findViewById(R.id.range);
     }
 
@@ -53,8 +51,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
     public void onLocationChanged(Location location) {
         this.latitude = String.valueOf(location.getLatitude());
         this.longitude = String.valueOf(location.getLongitude());
-        String text = "緯度：" + location.getLatitude() + " 経度：" + location.getLongitude();
-        textView.setText(text);
     }
 
     @Override
